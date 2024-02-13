@@ -35,6 +35,7 @@ import { DialogDefault } from "@/components/Modal";
 import { DetailSession } from "./sessions/DetailSession";
 import { Link, useNavigate } from "react-router-dom";
 import { GoAlertFill } from "react-icons/go";
+import { IoStatsChart } from "react-icons/io5";
 
 export function Home() {
   const navigate = useNavigate();
@@ -74,20 +75,25 @@ export function Home() {
       let arrangeData = [
         {
           color: "white",
-          icon: <FaUsers size={24} className="text-primary" />,
+          icon: <IoStatsChart size={24} className="text-primary" />,
           title: "Total Users",
           value: result?.users,
         },
-
         {
           color: "white",
-          icon: <GiTeacher size={24} className="text-primary" />,
+          icon: <IoStatsChart size={24} className="text-primary" />,
           title: "Total Instructor",
           value: result?.instructor,
         },
         {
           color: "white",
-          icon: <SiGoogleclassroom size={24} className="text-primary" />,
+          icon: <IoStatsChart size={24} className="text-primary" />,
+          title: "Total Sessions",
+          value: result?.sessions,
+        },
+        {
+          color: "white",
+          icon: <IoStatsChart size={24} className="text-primary" />,
           title: "Total Sessions",
           value: result?.sessions,
         },
@@ -160,7 +166,7 @@ export function Home() {
           </div>
         ) : (
           <>
-            <div className="mb-12 grid gap-y-10 gap-x-6 md:grid-cols-2 xl:grid-cols-3">
+            <div className="mb-12 grid gap-y-10 gap-x-6 md:grid-cols-3 xl:grid-cols-4">
               {stats?.map(({ icon, title, footer, ...rest }) => (
                 <StatisticsCard
                   key={title}

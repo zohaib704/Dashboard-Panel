@@ -73,18 +73,22 @@ export function Sidenav({ brandImg, brandName, routes }) {
                       //     ? "white"
                       //     : "blue-gray"
                       // }
-                      color={isActive ? "white" : "transparent"}
-                      className="flex items-center gap-4 px-4 capitalize"
+                      color={isActive ? "purple" : "transparent"}
+                      className={`flex items-center gap-4 px-4 capitalize text-white`}
                       fullWidth
                     >
-                      <div className={`${isActive ? "text-primary" : ""}`}>
+                      <div
+                        className={`${
+                          isActive ? "text-white" : "text-[#FFFFFF99]"
+                        }`}
+                      >
                         {icon}
                       </div>
 
                       <Typography
                         color="inherit"
                         className={`font-medium capitalize ${
-                          isActive ? "text-primary" : ""
+                          isActive ? "text-white" : "text-[#FFFFFF99]"
                         }`}
                       >
                         {name}

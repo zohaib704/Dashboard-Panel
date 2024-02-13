@@ -79,7 +79,7 @@ export function SignIn() {
       <div className="w-full md:w-1/2 lg:w-1/2 xl:w-1/3   bg-white rounded-3xl p-8 md:m-5">
         <div className="text-center">
           <Typography variant="h3" className="font-bold mb-4 text-primary ">
-            Head Start
+            Beard Friend
           </Typography>
           <Typography
             variant="h2"
@@ -92,7 +92,7 @@ export function SignIn() {
             color="blue-gray"
             className="text-md font-normal"
           >
-            Sign In to your headstart account
+            Sign In to your Beard Friend admin account
           </Typography>
         </div>
         <form
@@ -174,7 +174,7 @@ export function SignIn() {
 
           <Button
             type="submit"
-            className="mt-6 bg-primary text-dark text-sm hover:shadow-lg shadow-secondary"
+            className="mt-6 bg-[#0085FF] text-dark text-sm hover:shadow-lg shadow-secondary"
             fullWidth
             disabled={authLoad}
           >
