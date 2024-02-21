@@ -12,6 +12,10 @@ import { SessionTable } from "./pages/dashboard/sessions/tables";
 import AddSession from "./pages/dashboard/sessions/addSession";
 import EditSession from "./pages/dashboard/sessions/editSession";
 import { UserSupportTable } from "./pages/dashboard/userSupport";
+import Products from "./pages/dashboard/products/Products";
+import Contest from "./pages/dashboard/contest/Contest";
+import DetailsContest from "./pages/dashboard/contest/DetailsContest"
+
 
 function App() {
   return (
@@ -24,7 +28,7 @@ function App() {
             <>
               <Layout>
                 <Routes>
-                  <Route path="" element={<PrivateRoutes />}>
+                  {/* <Route path="" element={<PrivateRoutes />}> */}
                     <Route
                       path="/"
                       element={<Navigate to="/dashboard/home" />}
@@ -59,8 +63,23 @@ function App() {
                       path="/dashboard/user-support"
                       element={<UserSupportTable />}
                     />
+
+                      <Route
+                      path="/dashboard/products"
+                      element={<Products />}
+                    />
+
+                     <Route
+                      path="/dashboard/contest"
+                      element={<Contest />}
+                    />
+                    <Route
+                      path="/dashboard/contest/detailsContest"
+                      element={<DetailsContest />}
+                    />
+
                     {/* <Route path="/dashboard/profile" element={<Profile />} /> */}
-                  </Route>
+                  {/* </Route> */}
                 </Routes>
               </Layout>
             </>

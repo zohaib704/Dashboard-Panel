@@ -17,7 +17,7 @@ export function Layout({children}) {
   const { sidenavType } = controller;
 
   return (
-    <div className="min-h-screen bg-blue-gray-50/50">
+    <div className="min-h-screen bg-black">
       <Sidenav
         routes={routes}
         // routes={sideNavRoute
