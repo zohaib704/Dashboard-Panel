@@ -47,7 +47,7 @@ import {
   MagnifyingGlassIcon,
   ChevronUpDownIcon,
 } from "@heroicons/react/24/outline";
-export const UserTable = () => {
+const Orders = () => {
   const [activeTab, setActiveTab] = React.useState("Pending Approval");
   const navigate = useNavigate();
   const [stats, setStats] = useState(null);
@@ -131,8 +131,6 @@ export const UserTable = () => {
       toast.error("Server error.Please refresh the page..");
     }
   };
-
-  // This logic used for pagination
   const handleLeftArrowClick = () => {
     if (number > 0) {
       setNumber(number - 1);
@@ -140,7 +138,7 @@ export const UserTable = () => {
   };
 
   const handleRightArrowClick = () => {
-    if (number < 20) {
+    if (number < 10) {
       setNumber(number + 1);
     }
   };
@@ -148,16 +146,28 @@ export const UserTable = () => {
     getDashboardStats();
     getUpcomingSessions();
   }, []);
-
-  // This Data is used for Table Head
   const TABLE_HEAD = [
-    "ID#",
-    "Profile Picture",
-    "Member Name",
-    "Email Address",
-    // "Price",
-    // "Order Date",
-    "Actions",
+    "Order#",
+    "Photo",
+    "Name",
+    "Quantity",
+    "Price",
+    "Order Date",
+    "Delivered At",
+  ];
+  const TABS = [
+    {
+      label: "Pending Approval",
+      value: "Pending Approval",
+    },
+    {
+      label: "Delivered",
+      value: "Delivered",
+    },
+    {
+      label: "Cancelled",
+      value: "Cancelled",
+    },
   ];
 
   // Assuming hardcoded data
@@ -166,46 +176,39 @@ export const UserTable = () => {
       _id: 1,
       name: "Coutery Henry",
       picture: "Purpose 1",
-      email: "instructor1@example.com",
-      action: "Rs20",
+      quantity: "01",
+      price: "Rs20",
+      orderDate: Date(),
+      DeliveredAt: Date(),
     },
     {
       _id: 2,
       name: "Coutery Henry",
       picture: "Purpose 2",
-      email: "instructor2@example.com",
-      action: "Rs30",
+      quantity: "02",
+      price: "Rs20",
+      orderDate: Date(),
+      DeliveredAt: Date(),
     },
     {
       _id: 3,
       name: "David",
       picture: "Purpose 3",
-      email: "instructor3@example.com",
-      action: "Rs40",
+      quantity: "03",
+      price: "Rs40",
+      orderDate: Date(),
+      DeliveredAt: Date(),
     },
     {
       _id: 4,
       name: "Miller",
       picture: "Purpose 4",
-      email: "instructor4@example.com",
-      action: "Rs50",
+      quantity: "04",
+      price: "Rs50",
+      orderDate: Date(0, 9),
+      DeliveredAt: Date(),
     },
   ];
-  //Data of Tabs
-  // const TABS = [
-  //   {
-  //     label: "Pending Approval",
-  //     value: "Pending Approval",
-  //   },
-  //   {
-  //     label: "Delivered",
-  //     value: "Delivered",
-  //   },
-  //   {
-  //     label: "Cancelled",
-  //     value: "Cancelled",
-  //   },
-  // ];
   return (
     <>
       <div className="mb-4 grid grid-cols-1 gap-6 xl:grid-cols-1 pb-12 bg-black">
@@ -246,10 +249,8 @@ export const UserTable = () => {
             </div>
           </div>
           <div className="pt-12">
-            <div className="text-white text-2xl">Users</div>
-            <div className="text-gray-500 py-2">
-              Manage Members Or Barbershop's
-            </div>
+            <div className="text-white text-[28px]">Orders</div>
+            <div className="text-gray-500">Manage Your Orders Here</div>
           </div>
         </div>
         <Card className="overflow-hidden xl:col-span-2 bg-gray-900 shadow-sm mx-2 mr-5">
@@ -259,9 +260,8 @@ export const UserTable = () => {
             color="transparent"
             className="m-0 flex items-center justify-between p-6"
           >
-            {/* This div is used for entries, Search and Add Staff Button */}
-            <div className="flex gap-2 items-center justify-between w-full md:flex-row md:items-center flex-col">
-              <div className="flex flex-row items-center gap-x-2">
+            <div className="flex gap-2 items-center justify-between w-[100%] md:flex-row flex-col">
+              <div className="flex items-center gap-x-2">
                 <div className="relative inline-block text-left">
                   <select
                     id=""
@@ -278,7 +278,6 @@ export const UserTable = () => {
                     <option value="">3</option>
                     <option value="">2</option>
                     <option value="">1</option>
-                    <option value="">0</option>
                   </select>
                   <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-white">
                     <svg
@@ -294,20 +293,19 @@ export const UserTable = () => {
                     </svg>
                   </div>
                 </div>
-                <div className="text-gray-400 text-sm mt-2 ml-3 md:mt-0">
+                <div className="text-gray-400 text-sm ml-2">
                   Entries Per Page
                 </div>
               </div>
 
-              {/* Move search input and "Add Staff" button to the right corner */}
-              <div className="flex flex-col md:flex-row items-center mt-4 md:mt-0">
-                <div className="relative flex items-center">
+              <div>
+                <div className="relative ">
                   <input
                     className="rounded-full bg-black text-white font-nunito p-2 px-4 sm:w-48 md:w-72"
                     type="text"
                     placeholder="Search"
-                  />
-                  <div className="absolute right-3 flex items-center justify-center w-8 h-8 p-1 rounded-full">
+                  ></input>
+                  <div className=" flex items-center justify-center w-8 h-8 top-1 right-2 absolute p-1 rounded-full">
                     <IoIosSearch className="text-gray-300 text-2xl cursor-pointer" />
                   </div>
                 </div>
@@ -315,7 +313,7 @@ export const UserTable = () => {
             </div>
           </CardHeader>
           <CardBody className=" px-0 pt-0 pb-2">
-            {/* <div className="flex flex-col items-center justify-between gap-4 md:flex-row border-b border-gray-800 text-white">
+            <div className="flex flex-col items-center justify-between gap-4 md:flex-row border-b border-gray-800 text-white">
               <Tabs value={activeTab}>
                 <TabsHeader
                   className="rounded-none bg-transparent p-0 gap-7 left-2"
@@ -331,8 +329,8 @@ export const UserTable = () => {
                       onClick={() => setActiveTab(value)}
                       className={
                         activeTab === value
-                          ? "text-white text-justify whitespace-nowrap"
-                          : "text-gray-500 text-justify whitespace-nowrap"
+                          ? "text-white text-justify whitespace-nowrap font-nunito"
+                          : "text-gray-500 text-justify whitespace-nowrap font-nunito"
                       }
                     >
                       {label}
@@ -340,30 +338,34 @@ export const UserTable = () => {
                   ))}
                 </TabsHeader>
               </Tabs>
-            </div> */}
+            </div>
             <div className="overflow-x-auto">
               <table className="w-full min-w-[640px] table-auto mt-4">
                 <thead>
                   <tr className="bg-gray-800">
+                    <th className="cursor-pointer border-blue-gray-100  p-4 transition-colors">
+                      <input
+                        type="checkbox"
+                        class="custom-checkbox cursor-pointer"
+                      />
+                    </th>
                     {TABLE_HEAD.map((head, index) => (
                       <th
                         key={head}
-                        className="cursor-pointer border-blue-gray-100  p-1 px-4 py-4 transition-colors"
+                        className="cursor-pointer border-blue-gray-100  font-nunito p-1 transition-colors"
                       >
                         <Typography
                           variant="small"
                           color=""
-                          className="flex items-center text-white gap-2 font-nunito leading-none opacity-70"
+                          className="flex items-center  text-white gap-2 font-nunito leading-none opacity-70"
                         >
                           {head}
-                          {head !== "Profile Picture" &&
-                            head !== "Email Address" &&
-                            head !== "Actions" && (
-                              <ChevronUpDownIcon
-                                strokeWidth={2}
-                                className="h-4 w-4"
-                              />
-                            )}
+                          {head !== "Photo" && head !== "Price" && (
+                            <ChevronUpDownIcon
+                              strokeWidth={2}
+                              className="h-4 w-4"
+                            />
+                          )}
                         </Typography>
                       </th>
                     ))}
@@ -397,7 +399,18 @@ export const UserTable = () => {
                     <>
                       {hardcodedSessions?.length ? (
                         hardcodedSessions?.map(
-                          ({ _id, name, picture, email, action }, key) => {
+                          (
+                            {
+                              _id,
+                              name,
+                              picture,
+                              quantity,
+                              price,
+                              orderDate,
+                              DeliveredAt,
+                            },
+                            key,
+                          ) => {
                             const className = `py-3 text-center ${
                               key === hardcodedSessions?.length - 1
                                 ? "border-b border-gray-800 "
@@ -407,12 +420,18 @@ export const UserTable = () => {
                             return (
                               <tr key={_id}>
                                 <td className={className}>
-                                  <Typography className="text-xs font-semibold text-white text-left ml-6">
+                                  <input
+                                    type="checkbox"
+                                    class="custom-checkbox cursor-pointer"
+                                  />
+                                </td>
+                                <td className={className}>
+                                  <Typography className="text-xs font-nunito text-white text-left ml-6">
                                     {key + 1}
                                   </Typography>
                                 </td>
                                 <td className={className}>
-                                  <div className="flex items-center gap-4 text-center ml-8 ">
+                                  <div className="flex items-center gap-4 text-center ">
                                     <Avatar
                                       src={orderimg3}
                                       alt={picture}
@@ -421,7 +440,7 @@ export const UserTable = () => {
                                   </div>
                                 </td>
                                 <td className={className}>
-                                  <div className="overflow-hidden font-nunito whitespace-nowrap text-left ml-4">
+                                  <div className="overflow-hidden whitespace-nowrap text-left ml-2">
                                     <Typography
                                       variant="small"
                                       color="white"
@@ -433,19 +452,28 @@ export const UserTable = () => {
                                   </div>
                                 </td>
                                 <td className={className}>
-                                  <Typography className="text-xs font-nunito text-gray-400 text-left ml-4">
-                                    {email}
+                                  <Typography className="text-xs text-gray-400 text-left ml-3">
+                                    {quantity}
                                   </Typography>
                                 </td>
                                 <td className={className}>
-                                  <div className="flex flex-row items-start font-nunito gap-2 md:gap-5 pr-5">
-                                    <button className="bg-gray-600 rounded-md whitespace-nowrap ml-4 text-white py-2 px-4 mb-2">
-                                      Block User
-                                    </button>
-                                    <button className="bg-[#FF0000] rounded-md text-white py-2 px-4">
-                                      Delete
-                                    </button>
-                                  </div>
+                                  <Typography className="text-xs text-gray-400 text-left ml-2">
+                                    {price}
+                                  </Typography>
+                                </td>
+                                <td className={className}>
+                                  <Typography className="text-xs text-gray-400 text-left ml-2">
+                                    {moment(orderDate).format(
+                                      "DD/MM/YYYY HH:mm",
+                                    )}
+                                  </Typography>
+                                </td>
+                                <td className={className}>
+                                  <Typography className="text-xs text-gray-400 text-left ml-1">
+                                    {moment(DeliveredAt).format(
+                                      "DD/MM/YYYY HH:mm",
+                                    )}
+                                  </Typography>
                                 </td>
                               </tr>
                             );
@@ -461,9 +489,7 @@ export const UserTable = () => {
                 </tbody>
               </table>
             </div>
-
-            {/* Pagination */}
-            <div className="flex items-center justify-end gap-2 py-2 px-2 mr-4">
+            <div className="flex items-center justify-end gap-2 py-4 px-2 mr-4">
               <button
                 className="bg-gray-600 text-gray-300 rounded-md px-4 py-2 focus:outline-none h-8 w-8 flex items-center justify-center"
                 onClick={handleLeftArrowClick}
@@ -473,9 +499,6 @@ export const UserTable = () => {
 
               <div className="bg-[#BA5EEF] text-gray-300 rounded-md px-4 py-2 h-8 w-8 flex items-center justify-center">
                 {number}
-              </div>
-              <div className="bg-gray-600 text-gray-300 rounded-md px-4 py-2 focus:outline-none h-8 w-8 flex items-center justify-center">
-                {number + 1}
               </div>
 
               <button
@@ -491,3 +514,5 @@ export const UserTable = () => {
     </>
   );
 };
+
+export default Orders;

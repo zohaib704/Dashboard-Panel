@@ -10,14 +10,14 @@ import {
 import routes from "@/routes";
 import { useMaterialTailwindController, setOpenConfigurator } from "@/context";
 
-export function Layout({children}) {
+export function Layout({ children }) {
   console.log(routes); // Check the original routes array
-  
+
   const [controller, dispatch] = useMaterialTailwindController();
   const { sidenavType } = controller;
 
   return (
-    <div className="min-h-screen bg-blue-gray-50/50">
+    <div className="min-h-screen bg-black">
       <Sidenav
         routes={routes}
         // routes={sideNavRoute
@@ -26,12 +26,12 @@ export function Layout({children}) {
           sidenavType === "dark" ? "/img/logo-ct.png" : "/img/logo-ct-dark.png"
         }
       />
-      <div >
+      <div>
         <div className="xl:ml-72 ">
-        <DashboardNavbar />
+          <DashboardNavbar />
         </div>
         <div className="p-4 xl:ml-80">
-        {/* <Configurator />
+          {/* <Configurator />
         <IconButton
           size="lg"
           color="white"
@@ -41,12 +41,12 @@ export function Layout({children}) {
         >
           <Cog6ToothIcon className="h-5 w-5" />
         </IconButton> */}
-        {children}
-        {/* <div className="text-blue-gray-600">
+          {children}
+          {/* <div className="text-blue-gray-600">
           <Footer />
         </div> */}
+        </div>
       </div>
-    </div>
     </div>
   );
 }

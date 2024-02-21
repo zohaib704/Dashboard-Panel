@@ -47,7 +47,7 @@ import {
   MagnifyingGlassIcon,
   ChevronUpDownIcon,
 } from "@heroicons/react/24/outline";
-export const UserTable = () => {
+const Orders = () => {
   const [activeTab, setActiveTab] = React.useState("Pending Approval");
   const navigate = useNavigate();
   const [stats, setStats] = useState(null);
@@ -159,7 +159,21 @@ export const UserTable = () => {
     // "Order Date",
     "Actions",
   ];
-
+  //Data of Tabs
+  // const TABS = [
+  //   {
+  //     label: "Pending Approval",
+  //     value: "Pending Approval",
+  //   },
+  //   {
+  //     label: "Delivered",
+  //     value: "Delivered",
+  //   },
+  //   {
+  //     label: "Cancelled",
+  //     value: "Cancelled",
+  //   },
+  // ];
   // Assuming hardcoded data
   const hardcodedSessions = [
     {
@@ -191,21 +205,6 @@ export const UserTable = () => {
       action: "Rs50",
     },
   ];
-  //Data of Tabs
-  // const TABS = [
-  //   {
-  //     label: "Pending Approval",
-  //     value: "Pending Approval",
-  //   },
-  //   {
-  //     label: "Delivered",
-  //     value: "Delivered",
-  //   },
-  //   {
-  //     label: "Cancelled",
-  //     value: "Cancelled",
-  //   },
-  // ];
   return (
     <>
       <div className="mb-4 grid grid-cols-1 gap-6 xl:grid-cols-1 pb-12 bg-black">
@@ -213,7 +212,7 @@ export const UserTable = () => {
           <div className="flex flex-col sm:flex-row justify-between items-center">
             <div className="relative mb-4">
               <input
-                className="rounded-full bg-gray-900 text-white font-nunito p-2 px-4 sm:w-48 md:w-72"
+                className="rounded-full bg-gray-900 text-white p-2 px-4 sm:w-48 md:w-72"
                 type="text"
                 placeholder="Search"
               ></input>
@@ -246,10 +245,8 @@ export const UserTable = () => {
             </div>
           </div>
           <div className="pt-12">
-            <div className="text-white text-2xl">Users</div>
-            <div className="text-gray-500 py-2">
-              Manage Members Or Barbershop's
-            </div>
+            <div className="text-white text-2xl font-nunito">Staff</div>
+            <div className="text-gray-500 font-nunito">Manage Your Staff</div>
           </div>
         </div>
         <Card className="overflow-hidden xl:col-span-2 bg-gray-900 shadow-sm mx-2 mr-5">
@@ -268,6 +265,16 @@ export const UserTable = () => {
                     name=""
                     className="block appearance-none w-full bg-black text-white py-3 px-5 pr-8 rounded-md leading-tight focus:outline-none cursor-pointer"
                   >
+                    <option value="">20</option>
+                    <option value="">19</option>
+                    <option value="">18</option>
+                    <option value="">17</option>
+                    <option value="">16</option>
+                    <option value="">15</option>
+                    <option value="">14</option>
+                    <option value="">13</option>
+                    <option value="">12</option>
+                    <option value="">11</option>
                     <option value="">10</option>
                     <option value="">9</option>
                     <option value="">8</option>
@@ -278,7 +285,6 @@ export const UserTable = () => {
                     <option value="">3</option>
                     <option value="">2</option>
                     <option value="">1</option>
-                    <option value="">0</option>
                   </select>
                   <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-white">
                     <svg
@@ -294,7 +300,7 @@ export const UserTable = () => {
                     </svg>
                   </div>
                 </div>
-                <div className="text-gray-400 text-sm mt-2 ml-3 md:mt-0">
+                <div className="text-gray-400 text-sm mt-2 md:mt-0">
                   Entries Per Page
                 </div>
               </div>
@@ -303,14 +309,17 @@ export const UserTable = () => {
               <div className="flex flex-col md:flex-row items-center mt-4 md:mt-0">
                 <div className="relative flex items-center">
                   <input
-                    className="rounded-full bg-black text-white font-nunito p-2 px-4 sm:w-48 md:w-72"
+                    className="rounded-full text-white bg-black p-2 px-4 sm:w-48 md:w-72 lg:mr-3"
                     type="text"
                     placeholder="Search"
                   />
-                  <div className="absolute right-3 flex items-center justify-center w-8 h-8 p-1 rounded-full">
+                  <div className="absolute right-5 flex items-center justify-center w-8 h-8 p-1 rounded-full">
                     <IoIosSearch className="text-gray-300 text-2xl cursor-pointer" />
                   </div>
                 </div>
+                <button className="bg-[#BA5EEF] rounded-full text-white py-2 px-7 mt-2 md:mt-0 md:ml-2">
+                  Add Staff
+                </button>
               </div>
             </div>
           </CardHeader>
@@ -348,12 +357,12 @@ export const UserTable = () => {
                     {TABLE_HEAD.map((head, index) => (
                       <th
                         key={head}
-                        className="cursor-pointer border-blue-gray-100  p-1 px-4 py-4 transition-colors"
+                        className="cursor-pointer border-blue-gray-100  p-1 px-4 py-4  transition-colors"
                       >
                         <Typography
                           variant="small"
                           color=""
-                          className="flex items-center text-white gap-2 font-nunito leading-none opacity-70"
+                          className="flex items-center text-[#FFFFFF] font-Nunito gap-2 font-normal leading-none opacity-70"
                         >
                           {head}
                           {head !== "Profile Picture" &&
@@ -367,6 +376,9 @@ export const UserTable = () => {
                         </Typography>
                       </th>
                     ))}
+                    {/* <th>
+                      <p className="opacity-0">temp</p>
+                    </th> */}
                   </tr>
                 </thead>
 
@@ -421,7 +433,7 @@ export const UserTable = () => {
                                   </div>
                                 </td>
                                 <td className={className}>
-                                  <div className="overflow-hidden font-nunito whitespace-nowrap text-left ml-4">
+                                  <div className="overflow-hidden whitespace-nowrap text-left ml-4">
                                     <Typography
                                       variant="small"
                                       color="white"
@@ -433,19 +445,16 @@ export const UserTable = () => {
                                   </div>
                                 </td>
                                 <td className={className}>
-                                  <Typography className="text-xs font-nunito text-gray-400 text-left ml-4">
+                                  <Typography className="text-xs text-gray-400 text-left ml-4">
                                     {email}
                                   </Typography>
                                 </td>
                                 <td className={className}>
-                                  <div className="flex flex-row items-start font-nunito gap-2 md:gap-5 pr-5">
-                                    <button className="bg-gray-600 rounded-md whitespace-nowrap ml-4 text-white py-2 px-4 mb-2">
-                                      Block User
-                                    </button>
-                                    <button className="bg-[#FF0000] rounded-md text-white py-2 px-4">
+                                  <Typography className="text-xs text-gray-500 text-left ml-4">
+                                    <button className="bg-[#FF0000] rounded-md font-nunito text-white py-2 px-4">
                                       Delete
                                     </button>
-                                  </div>
+                                  </Typography>
                                 </td>
                               </tr>
                             );
@@ -491,3 +500,5 @@ export const UserTable = () => {
     </>
   );
 };
+
+export default Orders;

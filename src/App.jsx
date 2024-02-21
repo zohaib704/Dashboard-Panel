@@ -3,7 +3,7 @@ import { Toaster } from "react-hot-toast";
 import { ChangePassword, ForgetPassword, OTP, SignIn } from "./pages/auth";
 import Layout from "./layouts/Layout";
 import { Home, Notifications, Profile, Tables } from "./pages/dashboard";
-import { UserTable } from "./pages/dashboard/Users";
+import { UserTable } from "./pages/dashboard/Users/index";
 import { PrivateRoutes } from "./components/privateRoutes.js";
 import { InstructorTable } from "./pages/dashboard/instructor/tables";
 import AddInstructor from "./pages/dashboard/instructor/addInstructor";
@@ -12,6 +12,14 @@ import { SessionTable } from "./pages/dashboard/sessions/tables";
 import AddSession from "./pages/dashboard/sessions/addSession";
 import EditSession from "./pages/dashboard/sessions/editSession";
 import { UserSupportTable } from "./pages/dashboard/userSupport";
+import Orders from "./pages/dashboard/Orders/Orders";
+import OrdersB from "./pages/dashboard/Orders/OrdersB";
+
+import Staff from "./pages/dashboard/Staff/Staff";
+import OrderDetails from "./pages/dashboard/Orders/OrderDetails";
+import Staffb from "./pages/dashboard/Staff/Staffb";
+import EditProduct from "./pages/dashboard/Product/EditProduct";
+import EditProductb from "./pages/dashboard/Product/EditProductb";
 
 function App() {
   return (
@@ -59,6 +67,27 @@ function App() {
                       path="/dashboard/user-support"
                       element={<UserSupportTable />}
                     />
+
+                    <Route path="/dashboard/orders" element={<Orders />} />
+                    <Route path="/dashboard/ordersb" element={<OrdersB />} />
+                    <Route
+                      path="/dashboard/ordersdetail"
+                      element={<OrderDetails />}
+                    />
+
+                    <Route path="/dashboard/staff" element={<Staff />} />
+                    <Route path="/dashboard/staffb" element={<Staffb />} />
+
+                    {/* Product */}
+                    <Route
+                      path="/dashboard/product"
+                      element={<EditProduct />}
+                    />
+                    <Route
+                      path="/dashboard/productb"
+                      element={<EditProductb />}
+                    />
+
                     {/* <Route path="/dashboard/profile" element={<Profile />} /> */}
                   </Route>
                 </Routes>
