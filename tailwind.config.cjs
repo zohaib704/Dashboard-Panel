@@ -5,6 +5,10 @@ module.exports = withMT({
   content: ["./index.html", "./src/**/*.{js,ts,jsx,tsx}"],
   theme: {
     extend: {
+      fontFamily: {
+        nunito: ["Nunito", "sans-serif"],
+      },
+
       colors: {
         primary: "#1C1C1E",
         secondary: "#BA5EEF",

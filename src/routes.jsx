@@ -41,8 +41,8 @@ export const routes = [
       },
       {
         icon: <MdSupportAgent {...icon} />,
-        name: "User Support",
-        path: "/user-support",
+        name: "Staff",
+        path: "/staff",
         element: <SessionTable />,
       },
     ],
