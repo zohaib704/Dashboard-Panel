@@ -35,7 +35,9 @@ export function ForgetPassword() {
     try {
       seterrorMessage(null);
       const result = await axios.post(
-        `${import.meta.env.VITE_BASE_URL}/api/user/forget-password`,
+        `${import.meta.env.VITE_BASE_URL}/resetAdminPassword`,
+        // `${import.meta.env.VITE_BASE_URL}/api/user/forget-password`,
+
         values,
       );
       // toast.success(result.data.message)

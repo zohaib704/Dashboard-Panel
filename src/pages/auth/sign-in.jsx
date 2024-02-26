@@ -39,7 +39,9 @@ export function SignIn() {
     try {
       seterrorMessage(null);
       const result = await axios.post(
-        `${import.meta.env.VITE_BASE_URL}/api/user/login`,
+        // `${import.meta.env.VITE_BASE_URL}/api/user/login`,
+        `${import.meta.env.VITE_BASE_URL}/adminLogin`, //End point according to backend
+
         values,
       );
       console.log(result);

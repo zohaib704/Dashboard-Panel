@@ -49,7 +49,8 @@ export function ChangePasswordModal({ open, handleOpen, icon, buttonText }) {
         ...values,
       };
       const { data } = await axiosInstance.put(
-        `${import.meta.env.VITE_BASE_URL}/api/user/changePassword`,
+        // `${import.meta.env.VITE_BASE_URL}/api/user/changePassword`,
+        `${import.meta.env.VITE_BASE_URL}/resetAdminPassword`,
         body,
       );
       console.log(data);

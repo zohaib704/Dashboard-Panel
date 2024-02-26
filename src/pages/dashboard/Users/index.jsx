@@ -81,7 +81,10 @@ export function UserTable() {
   const handleBlockUnBlock = async () => {
     try {
       const { data } = await axiosInstance.put(
-        `${import.meta.env.VITE_BASE_URL}/api/user/blockUnblock`,
+        // `${import.meta.env.VITE_BASE_URL}/api/user/blockUnblock`,
+        `${import.meta.env.VITE_BASE_URL}/blockMember/${
+          selectedItem._id
+        }?action=block`,
         {
           userId: selectedItem._id,
           isBlocked: !selectedItem?.isBlocked,
@@ -105,7 +108,8 @@ export function UserTable() {
       const { data } = await axiosInstance.get(
         `${
           import.meta.env.VITE_BASE_URL
-        }/api/user/getAllUsers?currentPage=${currentPage}&pageSize=5&searchQuery=${searchQuery}`,
+          // }/api/user/getAllUsers?currentPage=${currentPage}&pageSize=5&searchQuery=${searchQuery}`,
+        }/members?currentPage=${currentPage}&pageSize=5&searchQuery=${searchQuery}`,
       );
       setallUsers(data.users);
       setTotalPages(data.totalPages);

@@ -33,7 +33,8 @@ export function OTP() {
       try {
         seterrorMessage(null);
         const result = await axios.post(
-          `${import.meta.env.VITE_BASE_URL}/api/user/verifyOtp`,
+          // `${import.meta.env.VITE_BASE_URL}/api/user/verifyOtp`,
+          `${import.meta.env.VITE_BASE_URL}/sendOTP`,
           {
             code: otp,
             email: email,
@@ -69,7 +70,8 @@ export function OTP() {
     try {
       setresendLoad(true);
       const result = await axios.post(
-        `${import.meta.env.VITE_BASE_URL}/api/user/resendVerificationCode`,
+        // `${import.meta.env.VITE_BASE_URL}/api/user/resendVerificationCode`,
+        `${import.meta.env.VITE_BASE_URL}/sendOTP`,
         {
           email,
         },
@@ -87,7 +89,8 @@ export function OTP() {
   const validate = async () => {
     try {
       const result = await axios.post(
-        `${import.meta.env.VITE_BASE_URL}/api/user/linkValidate`,
+        // `${import.meta.env.VITE_BASE_URL}/api/user/linkValidate`,
+        `${import.meta.env.VITE_BASE_URL}/linkValidate`,
         {
           id,
           token,
