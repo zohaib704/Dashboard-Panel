@@ -42,7 +42,8 @@ export function ChangePassword() {
     try {
       seterrorMessage(null);
       const result = await axios.post(
-        `${import.meta.env.VITE_BASE_URL}/api/user/resetPassword`,
+        // `${import.meta.env.VITE_BASE_URL}/api/user/resetPassword`,
+        `${import.meta.env.VITE_BASE_URL}/resetAdminPassword`,
         {
           password: values.password,
           _id: id,
@@ -91,7 +92,8 @@ export function ChangePassword() {
   const validate = async () => {
     try {
       const result = await axios.get(
-        `${import.meta.env.VITE_BASE_URL}/api/user/linkValidate/${id}/${token}`,
+        // `${import.meta.env.VITE_BASE_URL}/api/user/linkValidate/${id}/${token}`,
+        `${import.meta.env.VITE_BASE_URL}/linkValidate/${id}/${token}`,
       );
       console.log(result);
       setverifyLink(false);
