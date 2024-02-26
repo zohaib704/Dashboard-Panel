@@ -13,7 +13,7 @@ import toast from "react-hot-toast";
 import { FiChevronsRight } from "react-icons/fi";
 import { IoEyeSharp } from "react-icons/io5";
 
-import TabPanel from "./TabPanel";
+import TabPanel from "../orders/TabPanel";
 
 import moment from "moment";
 import { BsSearch } from "react-icons/bs";
@@ -23,9 +23,9 @@ import { IoStatsChart } from "react-icons/io5";
 import { ChevronUpDownIcon } from "@heroicons/react/24/solid";
 import { FaEdit } from "react-icons/fa";
 import { MdDeleteForever } from "react-icons/md";
-import Store from "../store/Store";
+import Store from "./StoreStatitics";
 
-const Orders = () => {
+const StoreOrders = () => {
   const navigate = useNavigate();
   const [stats, setStats] = useState(null);
   const [statsLoading, setStatsLoading] = useState(true);
@@ -159,8 +159,8 @@ const Orders = () => {
             </Typography>
             <Typography variant="small">Manage Your Products</Typography>
           </div>
-          <div className="flex gap-x-1 sm:gap-x-3 justify-start md:justify-end md:w-auto w-[100%]">
-            <div className="relative flex items-center ">
+          <div className="flex gap-x-1 sm:gap-x-3 justify-start md:justify-end w-[100%] md:w-[50%]">
+            <div className="relative flex items-center w-[70%] sm:[55%] md:w-[60%]">
               <input
                 type="text"
                 placeholder="Search..."
@@ -184,17 +184,17 @@ const Orders = () => {
                 <th className="text-left  p-4 bg-[#333333]">
                   <input
                     type="checkbox"
-                    className=" custom-checkbox h-4 w-4 bg-blue-gray-50/50 "
+                    className=" custom-checkbox-header h-4 w-4 bg-blue-gray-50/50 "
                   />
                 </th>
                 {TABLE_HEAD.map((head, index) => (
                   <th
                     key={index}
-                    className="cursor-pointer  bg-[#333333] p-4 hover:bg-blue-gray-50 hover:text-black text-white"
+                    className="  bg-[#333333] p-4 "
                   >
                     <Typography
                       variant="h6"
-                      className="flex items-center justify-between gap-2 font-normal leading-none opacity-70"
+                      className="flex items-center justify-between gap-2 font-nunito text-base text-gray-400 font-semibold"
                     >
                       {head}
                       {index !== TABLE_HEAD.length - 1 && (
@@ -267,7 +267,7 @@ const Orders = () => {
                               className="border-b-[2px]  border-gray-800"
                             >
                               <td className={className}>
-                                <input type="checkbox" />
+                                <input type="checkbox" className="custom-checkbox" />
                               </td>
 
                               <td className={className}>
@@ -343,9 +343,9 @@ const Orders = () => {
                   {/* ----------View All Records-----------  */}
 
                   <tr>
-                    <td colSpan={7} className="w-full ">
-                      <Typography className="flex justify-end text-white mt-3 items-center">
-                        <NavLink to="#">View All</NavLink>{" "}
+                    <td colSpan={8} className="w-full ">
+                      <Typography className="flex justify-end text-white mr-28 mt-3 items-center">
+                        <NavLink to="orders">View All</NavLink>
                         <FiChevronsRight className="ml-1" />
                       </Typography>
                     </td>
@@ -360,4 +360,4 @@ const Orders = () => {
   );
 };
 
-export default Orders;
+export default StoreOrders;

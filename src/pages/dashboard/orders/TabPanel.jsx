@@ -7,7 +7,7 @@ const TabPanels = () => {
   const [activeTab, setActiveTab] = useState('Active'); 
 
   const data = [
-    { label: 'PendingApproval' },
+    { label: 'Pending Approval' },
     { label: 'Delivered' },
     { label: 'Cancelled' }
   ];

@@ -173,11 +173,11 @@ const Contest = () => {
                     {TABLE_HEAD.map((head, index) => (
                       <th
                         key={head}
-                        className="cursor-pointer  bg-[#333333] p-4 hover:bg-blue-gray-50 hover:text-black text-white"
+                        className="cursor-pointer  bg-[#333333] p-4  text-white"
                       >
                         <Typography
                           variant="h6"
-                          className="flex items-center justify-between gap-2 font-normal leading-none opacity-70"
+                          className="flex items-center justify-between gap-2 text-sm font-medium font-nunito  text-gray-500"
                         >
                           {head}
                         </Typography>
@@ -271,7 +271,7 @@ const Contest = () => {
                                       <Typography
                                         variant="small"
                                         color="white"
-                                        className="font-semibold "
+                                        className=" text-sm font-medium font-nunito  text-gray-400 "
                                         style={{ textOverflow: "ellipsis" }}
                                       >
                                         {Mail}
@@ -279,7 +279,7 @@ const Contest = () => {
                                     </div>
                                   </td>
                                   <td className={className}>
-                                    <Typography className="text-xs font-semibold text-blue-gray-500">
+                                    <Typography className="text-sm font-medium font-nunito  text-gray-400">
                                       {Votes}
                                     </Typography>
                                   </td>
@@ -349,8 +349,8 @@ const Contest = () => {
 
                       <tr>
                         <td colSpan={7} className="w-full ">
-                          <Typography className="flex justify-end text-white mt-3 items-center mr-3">
-                            <NavLink to="#">View All</NavLink>{" "}
+                          <Typography className="flex justify-end font-nunito font-bold text-sm text-white mt-3 items-center mr-3">
+                            <NavLink to="detailsContest">View All</NavLink>{" "}
                             <FiChevronsRight className="ml-1" />
                           </Typography>
                         </td>
@@ -375,12 +375,12 @@ const Contest = () => {
               floated={false}
               shadow={false}
               color="transparent"
-              className="m-0 rounded-none h-[14.8rem]"
+              className="m-0 rounded-none h-[15.4rem]"
             >
               <img
                 src="https://s3-alpha-sig.figma.com/img/acee/b628/c2547d3df1f9b9af3bda07a191890a36?Expires=1708905600&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=Je9~5xXJDHLzIyGWvgYd~qkJjQLY7gPud15JfhoPzvjKw7UiiSBtipSnqHxvIf5sOW5NsF6bPAOKnFF5KbeJf08b6JRTCE2v1TSz4ChWJGrh~h-3fcEZeMCf-B8UbX5sNXHqYBDYXaQnGW7uRVztAml50Vh56AJaVT4Rq9nqqxELA1brkypxRPKMDt6F80REfBqZmrCP3W8FStt5CIvXYnD2rlp9nxtNU9UZ6vBtjDYEKbaPqz1NfFpMFf7zqzgqjoU1xMcL0sCmtlNR9SEKCLe6EHDinMOt2QjtvxvrBnMtdgwBf6wSdm8HDzyvxgjpkWXqY4TRuhCtG3fJVxcQsw__"
                 alt="ui/ux review check"
-                className="w-[100%] h-[15rem]"
+                className="w-[100%] h-[19rem]"
               />
               <div className="absolute bottom-0 right-0 text-white p-4">
                 <div
@@ -392,23 +392,23 @@ const Contest = () => {
               </div>
             </CardHeader>
             <CardBody className="">
-              <div className="flex justify-between">
-                <Typography variant="p" color="white" className="">
+              <div className="flex justify-between ">
+                <Typography variant="p" color="white" className="text-lg font-semibold font-nunito ">
                   1455 Votes
                 </Typography>
-                <Typography variant="p" color="white" className="">
+                <Typography variant="p" color="white" className="font-nunito font-semibold text-base">
                   24-02-2023
                 </Typography>
               </div>
               <div className="-mb-[20px]">
-                <Typography variant="p" color="gray" className="">
+                <Typography variant="p" color="gray" className="font-nunito font-semibold text-sm">
                   jonDeo@gmail.com
                 </Typography>
               </div>
             </CardBody>
             <hr className="border border-gray-800" />
             <CardFooter className="pt-[2px]">
-              <Typography className="flex justify-end text-white mt-3 items-center mr-3">
+              <Typography className="flex justify-end text-white font-nunito font-bold text-sm mt-3 items-center mr-3">
                 <NavLink to="detailsContest">Old Contest Winners</NavLink>
                 <FiChevronsRight className="ml-1" />
               </Typography>

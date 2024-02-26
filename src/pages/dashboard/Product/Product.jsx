@@ -5,7 +5,8 @@ import {
   CardHeader,
   CardBody,
   Avatar,
-  Button,
+  ButtonGroup,
+  IconButton
 } from "@material-tailwind/react";
 
 import axiosInstance from "@/utils/axiosConfigure";
@@ -13,21 +14,20 @@ import toast from "react-hot-toast";
 import { FiChevronsRight } from "react-icons/fi";
 import { IoEyeSharp } from "react-icons/io5";
 
-import TabPanel from "./TabPAnel";
-
 import moment from "moment";
 import { BsSearch } from "react-icons/bs";
 import { Link, NavLink, useNavigate } from "react-router-dom";
 
 import { IoStatsChart } from "react-icons/io5";
-import { ChevronUpDownIcon } from "@heroicons/react/24/solid";
+import { ArrowLeftIcon, ArrowRightIcon, ChevronUpDownIcon } from "@heroicons/react/24/solid";
 import { FaEdit } from "react-icons/fa";
 import { MdDeleteForever } from "react-icons/md";
-import Store from "../store/Store";
-import Orders from "../orders/Order";
+import TabPanels from "../Store/TabPanel";
+
 
 const Products = () => {
   const navigate = useNavigate();
+  const [pageActive, setPageActive] = useState();
   const [stats, setStats] = useState(null);
   const [statsLoading, setStatsLoading] = useState(true);
   const [sessionLoading, setSessionLoading] = useState(true);
@@ -37,6 +37,42 @@ const Products = () => {
   const [detail, setDetail] = useState(null);
   const handleDeleteModalOpen = () => setisDelete(!isDelete);
   const handleDetailModalOpen = () => setDetail(!detail);
+
+  const [singleRowCheck, setsingleRowCheck] = useState([]);
+  const [allRowCheck, setallRowCheck] = useState(false);
+  const [togglebtn, setTogglebtn] = useState(false)
+
+  const handleAllRowCheck = () => {
+    setallRowCheck(!allRowCheck);
+    setTogglebtn(!togglebtn);
+  };
+
+  const handleSingleRowCheck = (id) => {
+    if (singleRowCheck.includes(id)) {
+      setsingleRowCheck(singleRowCheck.filter(rowId => rowId !== id));
+    } else {
+      setsingleRowCheck([...singleRowCheck, id]);
+    }
+  };
+
+    //  --------------------- Pagination
+    const getItemProps = (index) => ({
+      variant: pageActive === index ? "filled" : "text",
+      color: "gray",
+      onClick: () => setPageActive(index),
+    });
+  
+    const next = () => {
+      if (pageActive === 5) return;
+  
+      setPageActive(pageActive + 1);
+    };
+  
+    const prev = () => {
+      if (pageActive === 1) return;
+  
+      setPageActive(pageActive - 1);
+    };
 
   const TABLE_HEAD = [
     "ID",
@@ -175,10 +211,8 @@ const Products = () => {
   }, []);
 
   return (
-    <section>
-    {/* -----------------------Store Component called Here------------------  */}
-    <Store />
-
+    <section>       
+       {/* Products section start  */}
       <Card className="overflow-hidden xl:col-span-2  mt-5 bg-[#1f1f21]">
         {/* -----------Card Header Section Start-----------------  */}
         <CardHeader
@@ -193,7 +227,36 @@ const Products = () => {
             </Typography>
             <Typography variant="small">Manage Your Products</Typography>
           </div>
-          <div className="flex gap-x-1 sm:gap-x-3 justify-start md:justify-end md:w-auto w-[100%]">
+
+          {togglebtn  ? (
+            <div className={` flex gap-x-1 sm:gap-x-3 justify-start md:justify-end md:w-auto w-[100%]`}>
+            <div className="relative flex w-[55%] items-center ">
+            
+           
+
+            <button
+                type="submit"
+                className=" text-white bg-[#7c7c7d] items-center hover:bg-opacity-90 
+                px-1  sm:px-6  
+                py-3  md:py-2 rounded-3xl  text-xs md:text-base"
+              >
+                inActive
+              </button>
+            </div>
+            <Link to="/dashboard/sessions" className="items-center flex">
+              <button
+                type="submit"
+                className=" text-white bg-[#FF0000] items-center hover:bg-opacity-90 
+                px-1  sm:px-6  
+                py-3  md:py-2 rounded-3xl  text-xs md:text-base"
+              >
+                Delete
+              </button>
+            </Link>
+          </div>
+      ) : (
+       
+        <div className={` flex gap-x-1 sm:gap-x-3 justify-start md:justify-end md:w-[55%] w-[100%]`}>
             <div className="relative flex w-[55%] items-center ">
               <input
                 type="text"
@@ -215,10 +278,16 @@ const Products = () => {
               </button>
             </Link>
           </div>
+          
+      )}
+
+          
+
+
         </CardHeader>
 
         {/* ---------tabs section----------  */}
-        <TabPanel />
+        <TabPanels />
 
         <CardBody className=" px-0 pt-0 overflow-x-auto ">
           <table className="w-full min-w-[640px] table-auto">
@@ -228,7 +297,10 @@ const Products = () => {
                 <th className="text-left  p-4 bg-[#333333]">
                   <input
                     type="checkbox"
-                    className=" custom-checkbox h-4 w-4 bg-blue-gray-50/50 "
+                    className=" custom-checkbox-header h-4 w-4 bg-blue-gray-50/50 
+                    "
+                    checked={allRowCheck}
+                    onChange={handleAllRowCheck}
                   />
                 </th>
                 {TABLE_HEAD.map((head, index) => (
@@ -284,7 +356,7 @@ const Products = () => {
                     demoData?.map(
                       (
                         {
-                          _id,
+                          ID,
                           photo,
                           Stock,
                           Name,
@@ -307,12 +379,23 @@ const Products = () => {
                           <>
                             {/*---------- All Data TDs -----------------------  */}
                             <tr
-                              key={_id}
-                              className="border-b-[2px]  border-gray-800"
+                              key={ID}    
+                              className={`border-b-[2px] border-gray-800 
+                              ${singleRowCheck.includes(ID) ? 'bg-[#483655]  ' : ''}
+                              ${allRowCheck ? "bg-[#483655] " : ""}
+                              `}
+                               
                             >
                               {/* Checkbox  */}
                               <td className={className}>
-                                <input type="checkbox" />
+                                <input 
+                                type="checkbox" 
+                                className="custom-checkbox"
+                                checked={singleRowCheck.includes(ID) || allRowCheck}
+                                onChange={() => handleSingleRowCheck(ID)} 
+
+                                />
+                                 
                               </td>
                               {/* id */}
                               <td className={className}>
@@ -421,25 +504,55 @@ const Products = () => {
                     </tr>
                   )}
 
-                  {/* ----------View All Records-----------  */}
+                  {/* ----------Paginations-----------  */}
 
                   <tr>
-                    <td colSpan={7} className="w-full ">
-                      <Typography className="flex justify-end text-white mt-3 items-center">
-                        <NavLink to="#">View All</NavLink>{" "}
-                        <FiChevronsRight className="ml-1" />
-                      </Typography>
-                    </td>
-                  </tr>
+                      <td colSpan={8} className="w-full pt-5">
+                        <div className="flex justify-end mr-[4%] text-white ">
+                          <ButtonGroup
+                            variant="outlined"
+                            className="text-white gap-2 "
+                          >
+                            <IconButton
+                              className="bg-gray-600 rounded-md"
+                              onClick={prev}
+                            >
+                              <ArrowLeftIcon
+                                strokeWidth={2}
+                                className="h-4 w-4  text-white "
+                              />
+                            </IconButton>
+                            <IconButton
+                              className="text-white rounded-md bg-[#BA5EEF]"
+                              {...getItemProps(1)}
+                            >
+                              1
+                            </IconButton>
+                            <IconButton
+                              className="text-white rounded-md bg-gray-600"
+                              {...getItemProps(2)}
+                            >
+                              2
+                            </IconButton>
+                            <IconButton
+                              className="bg-[#BA5EEF] rounded-md"
+                              onClick={next}
+                            >
+                              <ArrowRightIcon
+                                strokeWidth={2}
+                                className="h-4 w-4 text-white"
+                              />
+                            </IconButton>
+                          </ButtonGroup>
+                        </div>
+                      </td>
+                    </tr>
                 </>
               )}
             </tbody>
           </table>
         </CardBody>
       </Card>
-
-      {/* ---------------------Orders Component Called Here ---------------------- */}
-      <Orders />
     </section>
   );
 };

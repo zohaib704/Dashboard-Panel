@@ -4,23 +4,9 @@ import {
   Card,
   CardHeader,
   CardBody,
-  IconButton,
-  Menu,
-  MenuHandler,
-  MenuList,
-  MenuItem,
   Avatar,
-  Tooltip,
-  Progress,
-  Button,
-  Tabs,
-  TabsHeader,
-  Tab,
 } from "@material-tailwind/react";
-import { FaMobile, FaUsers } from "react-icons/fa";
-import { EllipsisVerticalIcon, ArrowUpIcon } from "@heroicons/react/24/outline";
-import { StatisticsCard } from "@/widgets/cards";
-import { StatisticsChart } from "@/widgets/charts";
+
 import {
   statisticsCardsData,
   statisticsChartsData,
@@ -36,18 +22,21 @@ import moment from "moment";
 import { BsThreeDotsVertical } from "react-icons/bs";
 import { DialogDefault } from "@/components/Modal";
 import { Link, useNavigate } from "react-router-dom";
-import { GoAlertFill } from "react-icons/go";
+
 import { IoStatsChart } from "react-icons/io5";
 import { IoIosSearch } from "react-icons/io";
 import orderimg1 from "../../../../public/img/Orderimg/world.png";
 import orderimg2 from "../../../../public/img/Orderimg/bell.png";
 import orderimg3 from "../../../../public/img/Orderimg/rounded.png";
+import StaffEdit from "./StaffEdit"
+
 import { tr } from "date-fns/locale";
 import {
   MagnifyingGlassIcon,
   ChevronUpDownIcon,
 } from "@heroicons/react/24/outline";
 const Orders = () => {
+  const [openModal, setOpenModal]=useState(false)
   const [activeTab, setActiveTab] = React.useState("Pending Approval");
   const navigate = useNavigate();
   const [stats, setStats] = useState(null);
@@ -60,6 +49,7 @@ const Orders = () => {
   const [number, setNumber] = useState(1);
   const handleDeleteModalOpen = () => setisDelete(!isDelete);
   const handleDetailModalOpen = () => setDetail(!detail);
+
   const handleDelete = async () => {
     try {
       const { data } = await axiosInstance.delete(
@@ -205,9 +195,13 @@ const Orders = () => {
       action: "Rs50",
     },
   ];
+
+
+
   return (
     <>
-      <div className="mb-4 grid grid-cols-1 gap-6 xl:grid-cols-1 pb-12 bg-black">
+     
+      <div className="mb-4 grid grid-cols-1 gap-6 xl:grid-cols-1 pb-12 bg-black ">
         <div className="p-1 m-1 ">
           <div className="flex flex-col sm:flex-row justify-between items-center">
             <div className="relative mb-4">
@@ -246,10 +240,11 @@ const Orders = () => {
           </div>
           <div className="pt-12">
             <div className="text-white text-2xl font-nunito">Staff</div>
-            <div className="text-gray-500 font-nunito">Manage Your Staff</div>
+            <div className="text-gray-700 text-base font-nunito">Manage Your Staff</div>
           </div>
         </div>
         <Card className="overflow-hidden xl:col-span-2 bg-gray-900 shadow-sm mx-2 mr-5">
+        { openModal && <StaffEdit closeModal={setOpenModal} /> }
           <CardHeader
             floated={false}
             shadow={false}
@@ -306,7 +301,7 @@ const Orders = () => {
               </div>
 
               {/* Move search input and "Add Staff" button to the right corner */}
-              <div className="flex flex-col md:flex-row items-center mt-4 md:mt-0">
+              <div className="flex flex-col md:flex-row items-center mt-4 md:mt-0 ">
                 <div className="relative flex items-center">
                   <input
                     className="rounded-full text-white bg-black p-2 px-4 sm:w-48 md:w-72 lg:mr-3"
@@ -317,39 +312,15 @@ const Orders = () => {
                     <IoIosSearch className="text-gray-300 text-2xl cursor-pointer" />
                   </div>
                 </div>
-                <button className="bg-[#BA5EEF] rounded-full text-white py-2 px-7 mt-2 md:mt-0 md:ml-2">
+                <button onClick={()=>setOpenModal(true)}  className="bg-[#BA5EEF] hover:bg-opacity-90  rounded-full text-white py-2 px-7 mt-2 md:mt-0 md:ml-2">
                   Add Staff
                 </button>
+                
               </div>
             </div>
+            
           </CardHeader>
           <CardBody className=" px-0 pt-0 pb-2">
-            {/* <div className="flex flex-col items-center justify-between gap-4 md:flex-row border-b border-gray-800 text-white">
-              <Tabs value={activeTab}>
-                <TabsHeader
-                  className="rounded-none bg-transparent p-0 gap-7 left-2"
-                  indicatorProps={{
-                    className:
-                      "bg-transparent border-b-2 border-white shadow-none rounded-none ",
-                  }}
-                >
-                  {TABS.map(({ label, value }) => (
-                    <Tab
-                      key={value}
-                      value={value}
-                      onClick={() => setActiveTab(value)}
-                      className={
-                        activeTab === value
-                          ? "text-white text-justify whitespace-nowrap"
-                          : "text-gray-500 text-justify whitespace-nowrap"
-                      }
-                    >
-                      {label}
-                    </Tab>
-                  ))}
-                </TabsHeader>
-              </Tabs>
-            </div> */}
             <div className="overflow-x-auto">
               <table className="w-full min-w-[640px] table-auto mt-4">
                 <thead>
@@ -451,7 +422,7 @@ const Orders = () => {
                                 </td>
                                 <td className={className}>
                                   <Typography className="text-xs text-gray-500 text-left ml-4">
-                                    <button className="bg-[#FF0000] rounded-md font-nunito text-white py-2 px-4">
+                                    <button className="bg-[#FF0000] hover:bg-[#ff0000d0] rounded-md font-nunito text-white py-2 px-4">
                                       Delete
                                     </button>
                                   </Typography>

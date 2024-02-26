@@ -17,7 +17,7 @@ import {
   TabsHeader,
   Tab,
 } from "@material-tailwind/react";
-import { FaMobile, FaUsers } from "react-icons/fa";
+import { FaMobile, FaRegBell, FaUsers } from "react-icons/fa";
 import { EllipsisVerticalIcon, ArrowUpIcon } from "@heroicons/react/24/outline";
 import { StatisticsCard } from "@/widgets/cards";
 import { StatisticsChart } from "@/widgets/charts";
@@ -30,10 +30,10 @@ import {
 import { CheckCircleIcon, ClockIcon } from "@heroicons/react/24/solid";
 import axiosInstance from "@/utils/axiosConfigure";
 import toast from "react-hot-toast";
-import { GiTeacher } from "react-icons/gi";
+import { GiEarthAmerica, GiTeacher } from "react-icons/gi";
 import { SiGoogleclassroom } from "react-icons/si";
 import moment from "moment";
-import { BsThreeDotsVertical } from "react-icons/bs";
+import { BsSearch, BsThreeDotsVertical } from "react-icons/bs";
 import { DialogDefault } from "@/components/Modal";
 import { Link, useNavigate } from "react-router-dom";
 import { GoAlertFill } from "react-icons/go";
@@ -42,11 +42,54 @@ import { IoIosSearch } from "react-icons/io";
 import orderimg1 from "../../../../public/img/Orderimg/world.png";
 import orderimg2 from "../../../../public/img/Orderimg/bell.png";
 import orderimg3 from "../../../../public/img/Orderimg/rounded.png";
+import storeProf from "../../../../public/img/store/storeprof.png";
+
 import { tr } from "date-fns/locale";
 import {
   MagnifyingGlassIcon,
   ChevronUpDownIcon,
 } from "@heroicons/react/24/outline";
+
+  // This Data is used for Table Head
+  const TABLE_HEAD = [
+    "ID#",
+    "Profile Picture",
+    "Member Name",
+    "Email Address",
+    "Actions",
+  ];
+
+ // Assuming hardcoded data
+ const hardcodedSessions = [
+  {
+    _id: 1,
+    name: "Coutery Henry",
+    picture: "Purpose 1",
+    email: "instructor1@example.com",
+    action: "Rs20",
+  },
+  {
+    _id: 2,
+    name: "Coutery Henry",
+    picture: "Purpose 2",
+    email: "instructor2@example.com",
+    action: "Rs30",
+  },
+  {
+    _id: 3,
+    name: "David",
+    picture: "Purpose 3",
+    email: "instructor3@example.com",
+    action: "Rs40",
+  },
+  {
+    _id: 4,
+    name: "Miller",
+    picture: "Purpose 4",
+    email: "instructor4@example.com",
+    action: "Rs50",
+  },
+];
 export const UserTable = () => {
   const [activeTab, setActiveTab] = React.useState("Pending Approval");
   const navigate = useNavigate();
@@ -147,112 +190,73 @@ export const UserTable = () => {
   useEffect(() => {
     getDashboardStats();
     getUpcomingSessions();
+   
   }, []);
 
-  // This Data is used for Table Head
-  const TABLE_HEAD = [
-    "ID#",
-    "Profile Picture",
-    "Member Name",
-    "Email Address",
-    // "Price",
-    // "Order Date",
-    "Actions",
-  ];
+// Searching  Logic 
+const [searchUserData, setSearchUserData] = useState(hardcodedSessions);
+const handleSearch = (event) => {
+  const newData = hardcodedSessions.filter(session => session.name.toLowerCase().includes(event.target.value.toLowerCase()));
+  setSearchUserData(newData);
+};
 
-  // Assuming hardcoded data
-  const hardcodedSessions = [
-    {
-      _id: 1,
-      name: "Coutery Henry",
-      picture: "Purpose 1",
-      email: "instructor1@example.com",
-      action: "Rs20",
-    },
-    {
-      _id: 2,
-      name: "Coutery Henry",
-      picture: "Purpose 2",
-      email: "instructor2@example.com",
-      action: "Rs30",
-    },
-    {
-      _id: 3,
-      name: "David",
-      picture: "Purpose 3",
-      email: "instructor3@example.com",
-      action: "Rs40",
-    },
-    {
-      _id: 4,
-      name: "Miller",
-      picture: "Purpose 4",
-      email: "instructor4@example.com",
-      action: "Rs50",
-    },
-  ];
-  //Data of Tabs
-  // const TABS = [
-  //   {
-  //     label: "Pending Approval",
-  //     value: "Pending Approval",
-  //   },
-  //   {
-  //     label: "Delivered",
-  //     value: "Delivered",
-  //   },
-  //   {
-  //     label: "Cancelled",
-  //     value: "Cancelled",
-  //   },
-  // ];
+
+ 
   return (
     <>
-      <div className="mb-4 grid grid-cols-1 gap-6 xl:grid-cols-1 pb-12 bg-black">
-        <div className="p-1 m-1 ">
-          <div className="flex flex-col sm:flex-row justify-between items-center">
-            <div className="relative mb-4">
-              <input
-                className="rounded-full bg-gray-900 text-white font-nunito p-2 px-4 sm:w-48 md:w-72"
-                type="text"
-                placeholder="Search"
-              ></input>
-              <div className=" flex items-center justify-center w-8 h-8 text-white top-1 right-1 absolute bg-[#BA5EEF] p-1 rounded-full">
-                <IoIosSearch className="cursor-pointer" />
-              </div>
-            </div>
-            <div className="flex gap-6">
-              <div>
-                <img
-                  src={orderimg1}
-                  alt=""
-                  className="h-[80%] cursor-pointer"
-                />
-              </div>
-              <div>
-                <img
-                  src={orderimg2}
-                  alt=""
-                  className="h-[80%] cursor-pointer"
-                />
-              </div>
-              <div>
-                <img
-                  src={orderimg3}
-                  alt=""
-                  className="h-[80%] cursor-pointer"
-                />
-              </div>
+      <div className="mb-4 grid grid-cols-1  xl:grid-cols-1 pb-12 bg-black">
+        <div className="  ">
+         
+        <div className="header-main-section">
+        <div className="header flex sm:flex-row flex-col 
+         justify-between
+         items-center">
+          <div className="relative mx-auto sm:mx-0 flex items-center
+           w-[80%] sm:w-[35%]">
+            <input
+              type="text"
+              placeholder="Search..."
+             
+              className="bg-gray-700 text-white py-2 px-2 
+                w-[100%] rounded-3xl "
+            />
+            <div className="absolute right-1 bg-[#BA5EEF] p-[10px] rounded-full flex items-center pointer-events-none">
+              <BsSearch className="h-4 w-4 text-white" />
             </div>
           </div>
-          <div className="pt-12">
-            <div className="text-white text-2xl">Users</div>
-            <div className="text-gray-500 py-2">
-              Manage Members Or Barbershop's
-            </div>
+
+          <div className="flex justify-around 
+          sm:mt-0 mt-5 md:w-[20%]  sm:w-auto  gap-x-1">
+            <span className="bg-[#BA5EEF] rounded-lg h-8 w-8 flex items-center justify-center">
+              <GiEarthAmerica />
+            </span>
+            <span className="bg-[#BA5EEF] rounded-lg h-8 w-8 flex items-center justify-center">
+              <FaRegBell />
+            </span>
+            <img
+              src={storeProf}
+              alt="storeProf"
+              className="w-8 h-8 rounded-full ml-7"
+            />
           </div>
         </div>
-        <Card className="overflow-hidden xl:col-span-2 bg-gray-900 shadow-sm mx-2 mr-5">
+        <div className="title-section mt-16 mb-5">
+          <Typography variant="h4" color="white"
+          className="font-nunito font-bold text-3xl"
+          >
+            Users
+          </Typography>
+          <Typography
+            variant="small"
+            color="gray"
+            className="max-w-sm font-normal"
+          >
+            Welcome to Users, Andre Genze
+          </Typography>
+        </div>
+      </div>
+        </div>
+        <Card className="overflow-hidden xl:col-span-2 bg-gray-900 shadow-sm">
           <CardHeader
             floated={false}
             shadow={false}
@@ -305,6 +309,7 @@ export const UserTable = () => {
                   <input
                     className="rounded-full bg-black text-white font-nunito p-2 px-4 sm:w-48 md:w-72"
                     type="text"
+                    onChange={handleSearch}
                     placeholder="Search"
                   />
                   <div className="absolute right-3 flex items-center justify-center w-8 h-8 p-1 rounded-full">
@@ -315,32 +320,7 @@ export const UserTable = () => {
             </div>
           </CardHeader>
           <CardBody className=" px-0 pt-0 pb-2">
-            {/* <div className="flex flex-col items-center justify-between gap-4 md:flex-row border-b border-gray-800 text-white">
-              <Tabs value={activeTab}>
-                <TabsHeader
-                  className="rounded-none bg-transparent p-0 gap-7 left-2"
-                  indicatorProps={{
-                    className:
-                      "bg-transparent border-b-2 border-white shadow-none rounded-none ",
-                  }}
-                >
-                  {TABS.map(({ label, value }) => (
-                    <Tab
-                      key={value}
-                      value={value}
-                      onClick={() => setActiveTab(value)}
-                      className={
-                        activeTab === value
-                          ? "text-white text-justify whitespace-nowrap"
-                          : "text-gray-500 text-justify whitespace-nowrap"
-                      }
-                    >
-                      {label}
-                    </Tab>
-                  ))}
-                </TabsHeader>
-              </Tabs>
-            </div> */}
+            
             <div className="overflow-x-auto">
               <table className="w-full min-w-[640px] table-auto mt-4">
                 <thead>
@@ -353,7 +333,7 @@ export const UserTable = () => {
                         <Typography
                           variant="small"
                           color=""
-                          className="flex items-center text-white gap-2 font-nunito leading-none opacity-70"
+                          className="flex items-center  gap-2 text-sm font-semibold font-nunito text-gray-500 "
                         >
                           {head}
                           {head !== "Profile Picture" &&
@@ -395,11 +375,11 @@ export const UserTable = () => {
                     </td>
                   ) : (
                     <>
-                      {hardcodedSessions?.length ? (
-                        hardcodedSessions?.map(
+                      {searchUserData?.length ? (
+                        searchUserData?.map(
                           ({ _id, name, picture, email, action }, key) => {
                             const className = `py-3 text-center ${
-                              key === hardcodedSessions?.length - 1
+                              key === searchUserData?.length - 1
                                 ? "border-b border-gray-800 "
                                 : "border-b border-gray-800 "
                             }`;
@@ -425,7 +405,7 @@ export const UserTable = () => {
                                     <Typography
                                       variant="small"
                                       color="white"
-                                      className=""
+                                      className="font-nunito font-normal text-base"
                                       style={{ textOverflow: "ellipsis" }}
                                     >
                                       {name}
@@ -433,16 +413,18 @@ export const UserTable = () => {
                                   </div>
                                 </td>
                                 <td className={className}>
-                                  <Typography className="text-xs font-nunito text-gray-400 text-left ml-4">
+                                  <Typography className="text-sm font-nunito text-gray-400 text-left ml-4">
                                     {email}
                                   </Typography>
                                 </td>
                                 <td className={className}>
                                   <div className="flex flex-row items-start font-nunito gap-2 md:gap-5 pr-5">
-                                    <button className="bg-gray-600 rounded-md whitespace-nowrap ml-4 text-white py-2 px-4 mb-2">
+                                    <button className="bg-[#7c7c7d] font-normal font-nunito rounded-md 
+                                     ml-4 text-white text-sm py-2 px-4 mb-2">
                                       Block User
                                     </button>
-                                    <button className="bg-[#FF0000] rounded-md text-white py-2 px-4">
+                                    <button className="bg-[#FF0000] font-normal font-nunito rounded-md 
+                                     text-white text-sm py-2 px-4">
                                       Delete
                                     </button>
                                   </div>

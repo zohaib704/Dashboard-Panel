@@ -34,7 +34,7 @@ const AreachartConfig = {
   series: [
     {
       name: "Sales",
-      data: [10, 20, 79, 12, 86, 70, 100],
+      data: [10, 20, 24,79,10,90,23, 12, 8, 3,70, 100],
     },
   ],
   options: {
@@ -60,25 +60,25 @@ const AreachartConfig = {
     },
     xaxis: {
       categories: [
-        "January",
-        "February",
-        "March",
-        "April",
+        "Jan",
+        "Febr",
+        "Mar",
+        "Apr",
         "May",
         "June",
         "July",
-        "August",
-        "September",
-        "October",
-        "November",
-        "December",
+        "Aug",
+        "Sep",
+        "Oct",
+        "Nov",
+        "Dec",
       ],
       labels: {
         style: {
           colors: "#616161",
           fontSize: "12px",
           fontFamily: "inherit",
-          fontWeight: 800,
+          fontWeight: 200,
         },
       },
     },
@@ -88,7 +88,7 @@ const AreachartConfig = {
           colors: "#616161",
           fontSize: "12px",
           fontFamily: "inherit",
-          fontWeight: 800,
+          fontWeight: 200,
         },
       },
     },
@@ -382,7 +382,9 @@ export function Home() {
           </div>
         </div>
         <div className="title-section mt-16 mb-5">
-          <Typography variant="h5" color="white">
+          <Typography variant="h4" color="white"
+          className="font-nunito font-bold text-3xl"
+          >
             Dashboard
           </Typography>
           <Typography
@@ -439,7 +441,7 @@ export function Home() {
                 className="flex flex-col gap-4 justify-between rounded-none md:flex-row md:items-center"
               >
                 <div>
-                  <Typography variant="h6" color="white">
+                  <Typography variant="h5" color="white" className="font-nunito font-semibold">
                     Users Statistics
                   </Typography>
                   <Typography
@@ -499,7 +501,7 @@ export function Home() {
                 className="flex flex-col gap-4 justify-between rounded-none md:flex-row md:items-center"
               >
                 <div>
-                  <Typography variant="h6" color="white">
+                  <Typography variant="h5" color="white" className="font-nunito font-semibold">
                     Store Statistics
                   </Typography>
                   <Typography
@@ -538,7 +540,7 @@ export function Home() {
           <div className="bg-[#2C2C2E]  rounded-xl text-white 
           py-2 md:py-8 px-3 space-y-2">
               <div>
-                <Typography>Stamps Assigned</Typography>
+                <Typography variant="h6" className="font-nunito">Stamps Assigned</Typography>
               </div>
 
               <div>
@@ -549,7 +551,7 @@ export function Home() {
             <div className="bg-[#2C2C2E]  
             rounded-xl text-white py-2 md:py-8 px-3  space-y-2 ">
               <div >
-                <Typography>Contest Participants</Typography>
+                <Typography variant="h6" className="font-nunito">Contest Participants</Typography>
               </div>
 
               <div>
@@ -575,29 +577,28 @@ export function Home() {
                 className="m-0 flex flex-col md:flex-row items-center justify-between sm:p-6 p-2"
               >
                 <div className="md:w-auto w-full mb-5 sm:mb-0">
-                  <Typography variant="h6" color="white" className="mb-1">
+                  <Typography variant="h5"  color="white" 
+                  className="mb-1 font-nunito font-semibold">
                     Contest Participants
                   </Typography>
                   <Typography variant="small">Ends in 4d 18h</Typography>
                 </div>
               </CardHeader>
               <CardBody className=" px-0 pt-0 overflow-x-auto ">
-                <table className="w-full">
+                <table className="w-full ">
                   {/* ----------Table Header---------- */}
                   <thead>
                     <tr>
                       {TABLE_HEAD.map((head, index) => (
                         <th
-                          key={head}
+                          key={index}
                           className="cursor-pointer ps-3  bg-[#333333] 
-                        py-3   hover:bg-blue-gray-50 hover:text-black
-                         text-gray-400"
+                        py-3   "
                         >
                           <Typography
                             variant="h6"
-                            className="flex items-center  text-sm font-normal
-                           opacity-70"
-                          >
+                            className="flex items-center  
+                            text-sm font-normal font-nunito text-gray-500 ">
                             {head}
                           </Typography>
                         </th>
@@ -654,7 +655,7 @@ export function Home() {
                                   {/*- All Data TDs -*/}
                                   <tr
                                     key={_id}
-                                    className="border-b-[2px] border-gray-800"
+                                    className=" border-b-[2px] border-gray-800"
                                   >
                                     {/* Rank */}
                                     <td className={className}>
@@ -688,12 +689,12 @@ export function Home() {
                                       </div>
                                     </td>
                                     <td className={className}>
-                                      <Typography className="text-sm  text-gray-400 font-extralight">
+                                      <Typography className="text-sm  font-nunito text-gray-400 font-normal">
                                         {Mail}
                                       </Typography>
                                     </td>
                                     <td className={className}>
-                                      <Typography className="text-xs text-center text-gray-400 font-light">
+                                      <Typography className="text-xs font-nunito text-center text-gray-400 font-light">
                                         {Votes}
                                       </Typography>
                                     </td>
@@ -765,7 +766,7 @@ export function Home() {
                         <tr>
                           <td colSpan={7} className="w-full ">
                             <Typography className="flex justify-end text-white text-sm mt-3 items-center mr-3">
-                              <NavLink to="#">View All</NavLink>
+                              <NavLink to="detailsContest">View All</NavLink>
                               <FiChevronsRight className="ml-1" />
                             </Typography>
                           </td>
@@ -788,7 +789,8 @@ export function Home() {
                 className="m-0 flex flex-col md:flex-row items-center justify-between sm:p-6 p-2"
               >
                 <div className="md:w-auto w-full mb-5 sm:mb-0">
-                  <Typography variant="h6" color="white" className="mb-1">
+                  <Typography variant="h5" color="white" 
+                  className="mb-1 font-nunito font-semibold">
                     Members
                   </Typography>
                   <Typography variant="small">
@@ -804,13 +806,13 @@ export function Home() {
                       <th
                         colSpan={3}
                         className=" cursor-pointer w-[100%] bg-[#333333] 
-                        py-3  hover:bg-blue-gray-50 hover:text-black
-                         text-white"
+                        py-3 
+                         "
                       >
                         <Typography
                           variant="h6"
-                          className="flex items-center ps-3 text-sm font-light text-gray-400
-                           opacity-70"
+                          className="flex items-center ps-3
+                            text-sm font-normal font-nunito text-gray-500 "
                         >
                           Members
                         </Typography>
@@ -889,11 +891,11 @@ export function Home() {
                                     <td className={className}>
                                       <Typography
                                         variant="small"
-                                        className="text-sm text-gray-300 "
+                                        className="text-sm text-gray-300 font-nunito "
                                       >
                                         Name
                                       </Typography>
-                                      <Typography className="text-xs">
+                                      <Typography className="text-xs font-nunito">
                                         {Mail}
                                       </Typography>
                                     </td>
@@ -988,7 +990,8 @@ export function Home() {
                 className="m-0 flex flex-col md:flex-row items-center justify-between sm:p-6 p-2"
               >
                 <div className="md:w-auto w-full mb-5 sm:mb-0">
-                  <Typography variant="h6" color="white" className="mb-1">
+                  <Typography variant="h5" color="white"
+                   className="mb-[3%] font-nunito font-semibold">
                   Barbershops
                   </Typography>
                   <Typography variant="small">
@@ -1009,8 +1012,10 @@ export function Home() {
                       >
                         <Typography
                           variant="h6"
-                          className="flex items-center ps-3 text-sm font-light text-gray-400
-                           opacity-70"
+                          className="
+                           flex items-center ps-3
+                            text-sm font-normal font-nunito text-gray-500
+                           "
                         >
                           Barbershops
                         </Typography>
@@ -1089,11 +1094,11 @@ export function Home() {
                                     <td className={className}>
                                       <Typography
                                         variant="small"
-                                        className="text-sm text-gray-300 "
+                                        className="text-sm text-gray-300 font-nunito "
                                       >
                                         Name
                                       </Typography>
-                                      <Typography className="text-xs">
+                                      <Typography className="text-xs font-nunito">
                                         {Mail}
                                       </Typography>
                                     </td>

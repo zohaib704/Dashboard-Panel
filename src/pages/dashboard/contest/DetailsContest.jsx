@@ -235,10 +235,16 @@ const Contest = () => {
             </div>
           </div>
           <div className="title mt-10">
-            <Typography variant="h5" color="white">
+            <Typography
+              variant="h4"
+              color="white"
+              className="font-nunito font-bold text-3xl"
+            >
               Contest
             </Typography>
-            <p className="text-gray-500 mb-5">Manage the Contest</p>
+            <p className="text-gray-700 font-nunito font-medium text-base mb-5">
+              Manage the Contest
+            </p>
           </div>
         </CardHeader>
         {/* ----------Main Card----------  */}
@@ -485,22 +491,46 @@ const Contest = () => {
                     {/* ----------Paginations-----------  */}
 
                     <tr>
-    <td colSpan={7} className="w-full pt-5">
-        <div className="flex justify-end mr-[4%] text-white ">
-        <ButtonGroup variant="outlined"  className="text-white gap-2 ">
-      <IconButton className="bg-gray-600 rounded-md" onClick={prev}>
-        <ArrowLeftIcon strokeWidth={2} className="h-4 w-4  text-white " />
-      </IconButton>
-      <IconButton  className="text-white rounded-md bg-[#BA5EEF]" {...getItemProps(1)}>1</IconButton>
-      <IconButton  className="text-white rounded-md bg-gray-600"  {...getItemProps(2)}>2</IconButton>
-      <IconButton className="bg-[#BA5EEF] rounded-md" onClick={next}>
-        <ArrowRightIcon strokeWidth={2} className="h-4 w-4 text-white" />
-      </IconButton>
-    </ButtonGroup>
-        </div>
-    </td>
-</tr>
-
+                      <td colSpan={7} className="w-full pt-5">
+                        <div className="flex justify-end mr-[4%] text-white ">
+                          <ButtonGroup
+                            variant="outlined"
+                            className="text-white gap-2 "
+                          >
+                            <IconButton
+                              className="bg-gray-600 rounded-md"
+                              onClick={prev}
+                            >
+                              <ArrowLeftIcon
+                                strokeWidth={2}
+                                className="h-4 w-4  text-white "
+                              />
+                            </IconButton>
+                            <IconButton
+                              className="text-white rounded-md bg-[#BA5EEF]"
+                              {...getItemProps(0)}
+                            >
+                              1
+                            </IconButton>
+                            <IconButton
+                              className="text-white rounded-md bg-gray-600"
+                              {...getItemProps(2)}
+                            >
+                              2
+                            </IconButton>
+                            <IconButton
+                              className="bg-[#BA5EEF] rounded-md"
+                              onClick={next}
+                            >
+                              <ArrowRightIcon
+                                strokeWidth={2}
+                                className="h-4 w-4 text-white"
+                              />
+                            </IconButton>
+                          </ButtonGroup>
+                        </div>
+                      </td>
+                    </tr>
                   </>
                 )}
               </tbody>

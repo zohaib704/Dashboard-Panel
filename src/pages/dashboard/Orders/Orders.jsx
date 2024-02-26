@@ -346,7 +346,7 @@ const Orders = () => {
                     <th className="cursor-pointer border-blue-gray-100  p-4 transition-colors">
                       <input
                         type="checkbox"
-                        class="custom-checkbox cursor-pointer"
+                        class="custom-checkbox-header cursor-pointer"
                       />
                     </th>
                     {TABLE_HEAD.map((head, index) => (

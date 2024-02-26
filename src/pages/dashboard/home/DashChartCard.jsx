@@ -76,7 +76,7 @@ const DashChartCard = ({ icon, title, total ,gradient }) => {
     rounded-lg text-white py-2 px-3 space-y-1">
     <div className="col-span-4 gap-y-3 flex flex-col"> 
       <div >
-        <Typography variant="small">{title}</Typography>
+        <Typography variant="small" className="font-nunito">{title}</Typography>
       </div>
       <div className="grid grid-cols-2">
         <div className="flex items-center gap-x-2">

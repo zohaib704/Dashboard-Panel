@@ -2,11 +2,12 @@ import { HomeIcon } from "@heroicons/react/24/solid";
 import { Home, Profile, Tables, Notifications } from "@/pages/dashboard";
 import { GiTeacher } from "react-icons/gi";
 import { UserTable } from "./pages/dashboard/Users";
-import { BiSolidCategory } from "react-icons/bi";
-import { InstructorTable } from "./pages/dashboard/instructor/tables";
-import { SiGoogleclassroom } from "react-icons/si";
+import  Contest  from "./pages/dashboard/contest/Contest";
+import { ImUsers } from "react-icons/im";
 import { SessionTable } from "./pages/dashboard/sessions/tables";
 import { MdSupportAgent } from "react-icons/md";
+import { FaRegUser } from "react-icons/fa";
+import { IoMdAppstore } from "react-icons/io";
 const icon = {
   className: "w-5 h-5 text-inherit",
 };
@@ -22,25 +23,25 @@ export const routes = [
         element: <Home />,
       },
       {
-        icon: <BiSolidCategory {...icon} />,
+        icon: <FaRegUser   {...icon} />,
         name: "Users",
         path: "/users",
         element: <UserTable />,
       },
       {
         icon: <GiTeacher {...icon} />,
-        name: "Instructor",
-        path: "/instructor",
-        element: <InstructorTable />,
+        name: "Contest",
+        path: "/Contest",
+        element: <Contest />,
       },
       {
-        icon: <SiGoogleclassroom {...icon} />,
-        name: "Sessions",
-        path: "/sessions",
+        icon: <IoMdAppstore  {...icon} />,
+        name: "Store",
+        path: "/Store",
         element: <SessionTable />,
       },
       {
-        icon: <MdSupportAgent {...icon} />,
+        icon: <ImUsers  {...icon} />,
         name: "Staff",
         path: "/staff",
         element: <SessionTable />,

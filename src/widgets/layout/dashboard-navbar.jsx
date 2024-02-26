@@ -90,27 +90,27 @@ export function DashboardNavbar() {
           </Typography> */}
           </div>
           <div className="flex items-center">
-            <div class="relative mx-auto ">
+            <div className="relative mx-auto ">
               <input
-                class=" bg-white h-10 px-5 pr-16 rounded-3xl text-sm focus:outline-none"
+                className=" bg-white h-10 px-5 pr-16 rounded-3xl text-sm focus:outline-none"
                 type="search"
                 name="search"
                 // value={searchQuery}
                 // onChange={(e) => setSearchQuery(e.target.value)}
                 placeholder="Search"
               />
-              <button type="submit" class="absolute right-0 top-0 mt-3 mr-4">
+              <button type="submit" className="absolute right-0 top-0 mt-3 mr-4">
                 <svg
-                  class="text-primary h-4 w-4 fill-current"
+                  className="text-primary h-4 w-4 fill-current"
                   xmlns="http://www.w3.org/2000/svg"
-                  xmlns:xlink="http://www.w3.org/1999/xlink"
+                  xmlnsXlink="http://www.w3.org/1999/xlink"
                   version="1.1"
                   id="Capa_1"
                   x="0px"
                   y="0px"
                   viewBox="0 0 56.966 56.966"
                   style={{ enableBackground: "new 0 0 56.966 56.966" }}
-                  xml:space="preserve"
+                  xmlSpace="preserve"
                   width="512px"
                   height="512px"
                 >

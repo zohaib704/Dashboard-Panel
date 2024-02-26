@@ -17,13 +17,15 @@ import OrdersB from "./pages/dashboard/Orders/OrdersB";
 
 import Staff from "./pages/dashboard/Staff/Staff";
 import OrderDetails from "./pages/dashboard/Orders/OrderDetails";
-import Staffb from "./pages/dashboard/Staff/Staffb";
+import StaffEdit from "./pages/dashboard/Staff/StaffEdit";
 import EditProduct from "./pages/dashboard/Product/EditProduct";
-import EditProductb from "./pages/dashboard/Product/EditProductb";
-import Products from "./pages/dashboard/products/Products";
-import Contest from "./pages/dashboard/contest/Contest";
-import DetailsContest from "./pages/dashboard/contest/DetailsContest"
 
+
+import Contest from "./pages/dashboard/contest/Contest";
+import DetailsContest from "./pages/dashboard/contest/DetailsContest";
+import Store from "./pages/dashboard/Store/Store";
+import Products from "./pages/dashboard/Product/Product";
+import AddEditProduct from "./pages/dashboard/sessions/AddProduct";
 
 function App() {
   return (
@@ -37,78 +39,64 @@ function App() {
               <Layout>
                 <Routes>
                   {/* <Route path="" element={<PrivateRoutes />}> */}
-                    <Route
-                      path="/"
-                      element={<Navigate to="/dashboard/home" />}
-                    />
-                    <Route path="/dashboard/home" element={<Home />} />
-                    <Route path="/dashboard/users" element={<UserTable />} />
-                    <Route
-                      path="/dashboard/instructor"
-                      element={<InstructorTable />}
-                    />
-                    <Route
-                      path="/dashboard/add-instructor"
-                      element={<AddInstructor />}
-                    />
-                    <Route
-                      path="/dashboard/edit-instructor/:instructorId"
-                      element={<EditInstructor />}
-                    />
-                    <Route
-                      path="/dashboard/sessions"
-                      element={<SessionTable />}
-                    />
-                    <Route
-                      path="/dashboard/add-session"
-                      element={<AddSession />}
-                    />
-                    <Route
-                      path="/dashboard/edit-session/:sessionId"
-                      element={<EditSession />}
-                    />
-                    <Route
-                      path="/dashboard/user-support"
-                      element={<UserSupportTable />}
-                    />
+                  <Route path="/" element={<Navigate to="/dashboard/home" />} />
+                  <Route path="/dashboard/home" element={<Home />} />
+                  <Route path="/dashboard/home/detailscontest" element={<DetailsContest />} />
 
-                    <Route path="/dashboard/orders" element={<Orders />} />
-                    <Route path="/dashboard/ordersb" element={<OrdersB />} />
-                    <Route
-                      path="/dashboard/ordersdetail"
-                      element={<OrderDetails />}
-                    />
+                  <Route path="/dashboard/users" element={<UserTable />} />
+                  <Route path="/dashboard/orders" element={<Orders />} />
+                  <Route path="/dashboard/ordersb" element={<OrdersB />} />
+                  <Route
+                    path="/dashboard/ordersdetail"
+                    element={<OrderDetails />}
+                  />
 
-                    <Route path="/dashboard/staff" element={<Staff />} />
-                    <Route path="/dashboard/staffb" element={<Staffb />} />
+                   <Route path="/dashboard/staff" element={<Staff />} />
+                   <Route path="/dashboard/staff/staffEdit" element={<StaffEdit />} />
 
-                    {/* Product */}
-                    <Route
-                      path="/dashboard/product"
-                      element={<EditProduct />}
-                    />
-                    <Route
-                      path="/dashboard/productb"
-                      element={<EditProductb />}
-                    />
+                  <Route path="/dashboard/product" element={<EditProduct />} />
+                  <Route path="/dashboard/AddEditProduct" element={<AddEditProduct />}/>
+
+                  <Route path="/dashboard/store" element={<Store />} />
+                  <Route path="/dashboard/store/product" element={<Products/>} />
+                  <Route path="/dashboard/store/orders" element={<Orders />} />
 
 
-                      <Route
-                      path="/dashboard/products"
-                      element={<Products />}
-                    />
 
-                     <Route
-                      path="/dashboard/contest"
-                      element={<Contest />}
-                    />
-                    <Route
-                      path="/dashboard/contest/detailsContest"
-                      element={<DetailsContest />}
-                    />
-
-                    {/* <Route path="/dashboard/profile" element={<Profile />} /> */}
-                  {/* </Route> */}
+                {/* contest routes  */}
+                  <Route path="/dashboard/contest" element={<Contest />} />
+                  <Route
+                    path="/dashboard/contest/detailsContest"
+                    element={<DetailsContest />}
+                  />
+                  {/* <Route
+                    path="/dashboard/instructor"
+                    element={<InstructorTable />}
+                  />
+                  <Route
+                    path="/dashboard/add-instructor"
+                    element={<AddInstructor />}
+                  />
+                  <Route
+                    path="/dashboard/edit-instructor/:instructorId"
+                    element={<EditInstructor />}
+                  />
+                  <Route
+                    path="/dashboard/sessions"
+                    element={<SessionTable />}
+                  />
+                  <Route
+                    path="/dashboard/add-session"
+                    element={<AddSession />}
+                  />
+                  <Route
+                    path="/dashboard/edit-session/:sessionId"
+                    element={<EditSession />}
+                  />
+                  <Routes
+                    path="/dashboard/user-support"
+                    element={<UserSupportTable />}
+                  /> */}
                 </Routes>
               </Layout>
             </>
