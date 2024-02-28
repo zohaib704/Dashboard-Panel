@@ -17,7 +17,7 @@ import OrdersB from "./pages/dashboard/Orders/OrdersB";
 
 import Staff from "./pages/dashboard/Staff/Staff";
 import OrderDetails from "./pages/dashboard/Orders/OrderDetails";
-import StaffEdit from "./pages/dashboard/Staff/StaffEdit";
+import StaffEdit from "./pages/dashboard/Staff/AddStaff";
 import EditProduct from "./pages/dashboard/Product/EditProduct";
 
 

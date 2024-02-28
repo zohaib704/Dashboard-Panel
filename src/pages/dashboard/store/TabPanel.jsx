@@ -1,10 +1,63 @@
-
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Tabs, TabsHeader, Tab, TabsBody, Typography } from '@material-tailwind/react';
-
+import StoreProductTable from './StoreProductTable';
+import ActiveProducts from '@/api/ActiveProduct';
+import OutOfStock from '@/api/OutOfStock';
+import InactiveProduct from '@/api/InactiveProduct';
+import DraftProduct from '@/api/DraftProduct';
 
 const TabPanels = () => {
   const [activeTab, setActiveTab] = useState('Active'); 
+  const [activeProduct, setActiveProduct] = useState([]);
+  const [draftProduct, setDraftProduct] = useState([]);
+  const [outofStock, setoutofStock] = useState([]);
+  const [inactiveProduct, setInactiveProduct] = useState([]);
+
+  
+
+
+  useEffect(() => {
+    const fetchActiveProduct = async () => {
+      try {
+        const productsData = await ActiveProducts();
+        setActiveProduct(productsData);
+      } catch (error) {
+        console.error("Error fetching active products:", error);
+      }
+    };
+
+    const fetchDraftProduct = async () => {
+      try {
+        const productsData = await DraftProduct();
+        setDraftProduct(productsData);
+      } catch (error) {
+        console.error("Error fetching active products:", error);
+      }
+    };
+
+    const fetchOutofStock = async () => {
+      try {
+        const productsData = await OutOfStock();
+        setoutofStock(productsData);
+      } catch (error) {
+        console.error("Error fetching active products:", error);
+      }
+    };
+
+    
+    const fetchInactiveProduct = async () => {
+      try {
+        const productsData = await InactiveProduct();
+        setInactiveProduct(productsData);
+      } catch (error) {
+        console.error("Error fetching active products:", error);
+      }
+    };
+    fetchInactiveProduct()
+    fetchDraftProduct()
+    fetchOutofStock();
+    fetchActiveProduct();
+  }, []);
 
   const data = [
     { label: 'Active' },
@@ -19,23 +72,20 @@ const TabPanels = () => {
 
   const renderTabContent = () => {
     switch (activeTab) {
-        case 'Active':
-            return <h1>Active Products</h1>;
-
-        case 'Draft':
-            return <h1>Draft Products</h1>;  
-        
-        case 'Out of Stock':
-            return <h1>Out of Stock</h1>;   
-        
-        case 'In Active':
-            return <h1>Inactive</h1>;      
-      
+      case 'Active':
+        return <StoreProductTable propsTableData={activeProduct}/>
+       
+      case 'Draft':
+        return <StoreProductTable propsTableData={draftProduct} />
+      case 'Out of Stock':
+        return <StoreProductTable propsTableData={outofStock} />
+      case 'In Active':
+        return <StoreProductTable propsTableData={inactiveProduct} />
       default:
         return null; 
     }
   };
-
+  // console.log(inactiveProduct);
   return (
     <Tabs value={activeTab}>
       <TabsHeader
@@ -68,4 +118,3 @@ const TabPanels = () => {
 };
 
 export default TabPanels;
-

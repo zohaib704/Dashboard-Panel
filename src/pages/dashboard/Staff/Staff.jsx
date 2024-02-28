@@ -28,19 +28,20 @@ import { IoIosSearch } from "react-icons/io";
 import orderimg1 from "../../../../public/img/Orderimg/world.png";
 import orderimg2 from "../../../../public/img/Orderimg/bell.png";
 import orderimg3 from "../../../../public/img/Orderimg/rounded.png";
-import StaffEdit from "./StaffEdit"
+
 
 import { tr } from "date-fns/locale";
 import {
   MagnifyingGlassIcon,
   ChevronUpDownIcon,
 } from "@heroicons/react/24/outline";
+import AllStaff from "@/api/AllStaff";
+import AddStaff from "./AddStaff"
 const Orders = () => {
   const [openModal, setOpenModal]=useState(false)
   const [activeTab, setActiveTab] = React.useState("Pending Approval");
   const navigate = useNavigate();
-  const [stats, setStats] = useState(null);
-  const [statsLoading, setStatsLoading] = useState(true);
+  
   const [sessionLoading, setSessionLoading] = useState(true);
   const [selectedItem, setselectedItem] = useState(null);
   const [upComingSessions, setUpComingSessions] = useState(null);
@@ -49,6 +50,23 @@ const Orders = () => {
   const [number, setNumber] = useState(1);
   const handleDeleteModalOpen = () => setisDelete(!isDelete);
   const handleDetailModalOpen = () => setDetail(!detail);
+
+  const [staff, setStaff] = useState();
+  const [searchStaff, setSearchStaff] = useState([]); 
+
+  const fetchStaffData = async () => {
+    try {
+      const StaffData = await AllStaff();
+      setStaff(StaffData);
+      setSearchStaff(StaffData);
+    } catch (error) {
+      console.log("Error fetching Staff", error);
+    }
+  };
+
+  useEffect(() => {
+    fetchStaffData();
+  }, []);
 
   const handleDelete = async () => {
     try {
@@ -145,57 +163,20 @@ const Orders = () => {
     "Profile Picture",
     "Member Name",
     "Email Address",
-    // "Price",
-    // "Order Date",
     "Actions",
   ];
-  //Data of Tabs
-  // const TABS = [
-  //   {
-  //     label: "Pending Approval",
-  //     value: "Pending Approval",
-  //   },
-  //   {
-  //     label: "Delivered",
-  //     value: "Delivered",
-  //   },
-  //   {
-  //     label: "Cancelled",
-  //     value: "Cancelled",
-  //   },
-  // ];
-  // Assuming hardcoded data
-  const hardcodedSessions = [
-    {
-      _id: 1,
-      name: "Coutery Henry",
-      picture: "Purpose 1",
-      email: "instructor1@example.com",
-      action: "Rs20",
-    },
-    {
-      _id: 2,
-      name: "Coutery Henry",
-      picture: "Purpose 2",
-      email: "instructor2@example.com",
-      action: "Rs30",
-    },
-    {
-      _id: 3,
-      name: "David",
-      picture: "Purpose 3",
-      email: "instructor3@example.com",
-      action: "Rs40",
-    },
-    {
-      _id: 4,
-      name: "Miller",
-      picture: "Purpose 4",
-      email: "instructor4@example.com",
-      action: "Rs50",
-    },
-  ];
 
+  const handleSearch = (search) => {
+    const searchTerm = search.target.value.toLowerCase();
+    console.log("Search Term:", searchTerm); // Debugging
+    const newSearchTerm = staff.filter((staffMember) =>
+      staffMember.username.toLowerCase().includes(searchTerm)
+    );
+    console.log("Filtered Results:", newSearchTerm); // Debugging
+    setSearchStaff(newSearchTerm); // Update searchStaff state
+  };
+  
+// console.log(staff);
 
 
   return (
@@ -209,6 +190,7 @@ const Orders = () => {
                 className="rounded-full bg-gray-900 text-white p-2 px-4 sm:w-48 md:w-72"
                 type="text"
                 placeholder="Search"
+                
               ></input>
               <div className=" flex items-center justify-center w-8 h-8 text-white top-1 right-1 absolute bg-[#BA5EEF] p-1 rounded-full">
                 <IoIosSearch className="cursor-pointer" />
@@ -244,7 +226,7 @@ const Orders = () => {
           </div>
         </div>
         <Card className="overflow-hidden xl:col-span-2 bg-gray-900 shadow-sm mx-2 mr-5">
-        { openModal && <StaffEdit closeModal={setOpenModal} /> }
+        { openModal && <AddStaff closeModal={setOpenModal} /> }
           <CardHeader
             floated={false}
             shadow={false}
@@ -306,6 +288,7 @@ const Orders = () => {
                   <input
                     className="rounded-full text-white bg-black p-2 px-4 sm:w-48 md:w-72 lg:mr-3"
                     type="text"
+                    onChange={handleSearch}
                     placeholder="Search"
                   />
                   <div className="absolute right-5 flex items-center justify-center w-8 h-8 p-1 rounded-full">
@@ -327,7 +310,7 @@ const Orders = () => {
                   <tr className="bg-gray-800">
                     {TABLE_HEAD.map((head, index) => (
                       <th
-                        key={head}
+                        key={index}
                         className="cursor-pointer border-blue-gray-100  p-1 px-4 py-4  transition-colors"
                       >
                         <Typography
@@ -378,11 +361,11 @@ const Orders = () => {
                     </td>
                   ) : (
                     <>
-                      {hardcodedSessions?.length ? (
-                        hardcodedSessions?.map(
-                          ({ _id, name, picture, email, action }, key) => {
+                      {searchStaff?.length ? (
+                        searchStaff?.map(
+                          ({ _id, profilePicture,email, username}, key) => {
                             const className = `py-3 text-center ${
-                              key === hardcodedSessions?.length - 1
+                              key === staff?.length - 1
                                 ? "border-b border-gray-800 "
                                 : "border-b border-gray-800 "
                             }`;
@@ -397,8 +380,8 @@ const Orders = () => {
                                 <td className={className}>
                                   <div className="flex items-center gap-4 text-center ml-8 ">
                                     <Avatar
-                                      src={orderimg3}
-                                      alt={picture}
+                                      src={profilePicture}
+                                      alt={username}
                                       size="sm"
                                     />
                                   </div>
@@ -411,7 +394,7 @@ const Orders = () => {
                                       className=""
                                       style={{ textOverflow: "ellipsis" }}
                                     >
-                                      {name}
+                                      {username}
                                     </Typography>
                                   </div>
                                 </td>
